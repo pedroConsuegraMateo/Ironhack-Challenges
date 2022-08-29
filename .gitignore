@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# big datasets
+/2022_08_27-ab_test_challenge/data
