@@ -1,0 +1,6 @@
+SELECT categories.id as "category_id", categories.category, p.title, p.views, p.id as "post_id"
+FROM categories
+LEFT JOIN LATERAL (SELECT id, category_id, title, views FROM posts WHERE categories.id = posts.category_id ORDER BY views DESC LIMIT 2) AS p 
+ON categories.id = p.category_id
+
+ORDER BY categories.category, p.views DESC, "post_id"
