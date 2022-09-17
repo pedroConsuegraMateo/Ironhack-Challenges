@@ -1,0 +1,15 @@
+SELECT products.name as "product_name", 
+EXTRACT(YEAR FROM sales.date) as "year",
+EXTRACT(MONTH FROM sales.date) as "month", 
+EXTRACT(DAY FROM sales.date) as "day", 
+SUM(products.price*sales_details.count) as "total"
+
+FROM products
+INNER JOIN sales_details ON products.id = sales_details.product_id
+INNER JOIN sales ON sales.id = sales_details.sale_id
+
+GROUP BY 
+  "product_name",
+  ROLLUP ("year", "month", "day")
+
+ORDER by "product_name", "year";
